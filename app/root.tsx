@@ -1,96 +1,53 @@
-import type { LinksFunction, LoaderFunction } from 'remix'
 import {
-  Meta,
+  Link,
   Links,
-  Scripts,
-  useLoaderData,
   LiveReload,
-  useCatch,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
 } from 'remix'
-import { Link, Outlet } from 'react-router-dom'
+import type { MetaFunction } from 'remix'
 
-import stylesUrl from './styles/global.css'
+import styles from '~/styles/global.css'
 
-export let links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: stylesUrl }]
+export function links() {
+  return [{ rel: 'stylesheet', href: styles }]
 }
 
-export let loader: LoaderFunction = async () => {
-  return { date: new Date() }
+export const meta: MetaFunction = () => {
+  return { title: 'Remix Blog' }
 }
 
-function Document({
-  children,
-  title,
-}: {
-  children: React.ReactNode
-  title?: string
-}) {
+function Layout() {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        {title ? <title>{title}</title> : null}
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-        {process.env.NODE_ENV === 'development' && <LiveReload />}
-      </body>
-    </html>
+    <ul>
+      <li>
+        <Link to="/posts">Posts</Link>
+      </li>
+      <li>
+        <Link to="/admin">Admin</Link>
+      </li>
+    </ul>
   )
 }
 
 export default function App() {
-  let data = useLoaderData()
-
   return (
-    <Document>
-      <Link to="/gists">Gists</Link>
-      <Link to="/team">Team</Link>
-      <Outlet />
-      <footer>
-        <p>This page was rendered at {data.date.toLocaleString()}</p>
-      </footer>
-    </Document>
-  )
-}
-
-export function CatchBoundary() {
-  let caught = useCatch()
-
-  switch (caught.status) {
-    case 401:
-    case 404:
-      return (
-        <Document title={`${caught.status} ${caught.statusText}`}>
-          <h1>
-            {caught.status} {caught.statusText}
-          </h1>
-        </Document>
-      )
-
-    default:
-      throw new Error(
-        `Unexpected caught response with status: ${caught.status}`
-      )
-  }
-}
-
-export function ErrorBoundary({ error }: { error: Error }) {
-  console.error(error)
-
-  return (
-    <Document title="Uh-oh!">
-      <h1>App Error</h1>
-      <pre>{error.message}</pre>
-      <p>
-        Replace this UI with what you want users to see when your app throws
-        uncaught errors.
-      </p>
-    </Document>
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <Layout />
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
+      </body>
+    </html>
   )
 }

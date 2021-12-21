@@ -1,29 +1,10 @@
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
 body {
-  font-family: sans-serif;
-  color: #fafafa;
-  background-color: #1d212b;
-}
-
-footer {
-  text-align: center;
-  color: #ccc;
-  padding-top: 80px;
+  font-family: 'Inter', sans-serif;
+  color: hsl(0 0% 98%);
+  background-color: hsl(220 20% 14%);
+  font-size: 1.125rem;
 }
 
 a {
-  color: #c400c4;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.spin {
-  animation: spin 1s infinite;
+  color: hsl(0 0% 98%);
 }
