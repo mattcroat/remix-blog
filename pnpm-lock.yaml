@@ -4,11 +4,12 @@ specifiers:
   '@remix-run/dev': ^1.1.1
   '@remix-run/react': ^1.1.1
   '@remix-run/serve': ^1.1.1
+  '@remix-run/vercel': ^1.1.1
   '@types/marked': ^4.0.1
   '@types/react': ^17.0.24
   '@types/react-dom': ^17.0.9
   front-matter: ^4.0.2
-  marked: ^4.0.7
+  marked: ^4.0.8
   react: ^17.0.2
   react-dom: ^17.0.2
   remix: ^1.1.1
@@ -18,9 +19,10 @@ specifiers:
 dependencies:
   '@remix-run/react': 1.1.1_react-dom@17.0.2+react@17.0.2
   '@remix-run/serve': 1.1.1_react-dom@17.0.2+react@17.0.2
+  '@remix-run/vercel': 1.1.1_react-dom@17.0.2+react@17.0.2
   '@types/marked': 4.0.1
   front-matter: 4.0.2
-  marked: 4.0.7
+  marked: 4.0.8
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   remix: 1.1.1
@@ -178,6 +180,18 @@ packages:
       source-map: 0.7.3
     dev: false
 
+  /@remix-run/vercel/1.1.1_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-I7YgUIQJFjJmTiSK5gPE4t0LZRF0iwL7kXQRi05u5znPnOQDmpV/uUFaeET2tHD94B4t4FLI5VDQVF4q7/LLKw==}
+    peerDependencies:
+      '@vercel/node': ^1.8.3
+    dependencies:
+      '@remix-run/node': 1.1.1_react-dom@17.0.2+react@17.0.2
+      '@remix-run/server-runtime': 1.1.1_react-dom@17.0.2+react@17.0.2
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: false
+
   /@rollup/pluginutils/4.1.2:
     resolution: {integrity: sha512-ROn4qvkxP9SyPeHaf7uQC/GPFY6L/OWy9+bd9AwcjOAWQwxRscoEyAUD8qCY5o5iL4jqQwoLk2kaTKJPb/HwzQ==}
     engines: {node: '>= 8.0.0'}
@@ -207,7 +221,7 @@ packages:
   /@types/busboy/0.3.1:
     resolution: {integrity: sha512-8BPLNy4x+7lbTOGkAyUIZrrPEZ7WzbO7YlVGMf9EZi9J9mqILEkYbt/kgVWQ7fizOISo1hM/7cAsWVTa7EhQDg==}
     dependencies:
-      '@types/node': 17.0.0
+      '@types/node': 17.0.2
     dev: false
 
   /@types/cacheable-request/6.0.2:
@@ -215,7 +229,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.3
-      '@types/node': 17.0.0
+      '@types/node': 17.0.2
       '@types/responselike': 1.0.0
     dev: true
 
@@ -256,7 +270,7 @@ packages:
   /@types/keyv/3.1.3:
     resolution: {integrity: sha512-FXCJgyyN3ivVgRoml4h94G/p3kY+u/B86La+QptcqJaWtBWtmc6TtkNfS40n9bIvyLteHh7zXOtgbobORKPbDg==}
     dependencies:
-      '@types/node': 17.0.0
+      '@types/node': 17.0.2
     dev: true
 
   /@types/marked/4.0.1:
@@ -284,12 +298,12 @@ packages:
   /@types/node-fetch/2.5.12:
     resolution: {integrity: sha512-MKgC4dlq4kKNa/mYrwpKfzQMB5X3ee5U6fSprkKpToBqBmX4nFZL9cW5jl6sWn+xpRJ7ypWh2yyqqr8UUCstSw==}
     dependencies:
-      '@types/node': 17.0.0
+      '@types/node': 17.0.2
       form-data: 3.0.1
     dev: false
 
-  /@types/node/17.0.0:
-    resolution: {integrity: sha512-eMhwJXc931Ihh4tkU+Y7GiLzT/y/DBNpNtr4yU9O2w3SYBsr9NaOPhQlLKRmoWtI54uNwuo0IOUFQjVOTZYRvw==}
+  /@types/node/17.0.2:
+    resolution: {integrity: sha512-JepeIUPFDARgIs0zD/SKPgFsJEAF0X5/qO80llx59gOxFTboS9Amv3S+QfB7lqBId5sFXJ99BN0J6zFRvL9dDA==}
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -316,7 +330,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 17.0.0
+      '@types/node': 17.0.2
     dev: true
 
   /@types/scheduler/0.16.2:
@@ -1068,7 +1082,7 @@ packages:
     dependencies:
       '@types/estree-jsx': 0.0.1
       estree-util-is-identifier-name: 2.0.0
-      estree-walker: 3.0.0
+      estree-walker: 3.0.1
     dev: true
 
   /estree-util-is-identifier-name/1.1.0:
@@ -1097,8 +1111,8 @@ packages:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
 
-  /estree-walker/3.0.0:
-    resolution: {integrity: sha512-s6ceX0NFiU/vKPiKvFdR83U1Zffu7upwZsGwpoqfg5rbbq1l50WQ5hCeIvM6E6oD4shUHCYMsiFPns4Jk0YfMQ==}
+  /estree-walker/3.0.1:
+    resolution: {integrity: sha512-woY0RUD87WzMBUiZLx8NsYr23N5BKsOMZHhu2hoNRVh6NXGfoiT1KOL8G3UHlJAnEDGmfa5ubNA/AacfG+Kb0g==}
     dev: true
 
   /etag/1.8.1:
@@ -1768,8 +1782,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /marked/4.0.7:
-    resolution: {integrity: sha512-mQrRvV2vRk7DHZsWsYJfAjmBo+lSYPhTJPThaaGpkEfmC+4oefeug2txZniQTieDS0CFpokfVhd7JuS5GtnHhA==}
+  /marked/4.0.8:
+    resolution: {integrity: sha512-dkpJMIlJpc833hbjjg8jraw1t51e/eKDoG8TFOgc5O0Z77zaYKigYekTDop5AplRoKFGIaoazhYEhGkMtU3IeA==}
     engines: {node: '>= 12'}
     hasBin: true
     dev: false
@@ -2467,7 +2481,7 @@ packages:
   /periscopic/3.0.4:
     resolution: {integrity: sha512-SFx68DxCv0Iyo6APZuw/AKewkkThGwssmU0QWtTlvov3VAtPX+QJ4CadwSaz8nrT5jPIuxdvJWB4PnD2KNDxQg==}
     dependencies:
-      estree-walker: 3.0.0
+      estree-walker: 3.0.1
       is-reference: 3.0.0
     dev: true
 
@@ -3181,7 +3195,7 @@ packages:
       astring: 1.8.1
       estree-util-build-jsx: 2.0.0
       estree-util-is-identifier-name: 2.0.0
-      estree-walker: 3.0.0
+      estree-walker: 3.0.1
       got: 11.8.3
       hast-util-to-estree: 2.0.2
       loader-utils: 2.0.2
