@@ -21,7 +21,7 @@ interface NewPost {
   markdown: string
 }
 
-let postsPath = path.join(__dirname, '../..', 'app/posts')
+let postsPath = path.join(__dirname, '../..', 'posts')
 
 function isValidPostAttributes(
   attributes: any
