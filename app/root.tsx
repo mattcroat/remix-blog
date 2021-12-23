@@ -1,4 +1,5 @@
 import {
+  ErrorBoundaryComponent,
   Link,
   Links,
   LiveReload,
@@ -47,6 +48,23 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
+      </body>
+    </html>
+  )
+}
+
+export let ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <h1>Oops!</h1>
+        <div>ERROR: {error.message}</div>
+        <Scripts />
       </body>
     </html>
   )
