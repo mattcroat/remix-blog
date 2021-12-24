@@ -26,9 +26,6 @@ function Layout() {
       <li>
         <Link to="/posts">Posts</Link>
       </li>
-      <li>
-        <Link to="/admin">Admin</Link>
-      </li>
     </ul>
   )
 }
