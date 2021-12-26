@@ -8,6 +8,7 @@ specifiers:
   '@types/marked': ^4.0.1
   '@types/react': ^17.0.24
   '@types/react-dom': ^17.0.9
+  dotenv: ^10.0.0
   front-matter: ^4.0.2
   marked: ^4.0.8
   octokit: ^1.7.1
@@ -34,6 +35,7 @@ devDependencies:
   '@remix-run/dev': 1.1.1
   '@types/react': 17.0.37
   '@types/react-dom': 17.0.11
+  dotenv: 10.0.0
   typescript: 4.5.4
 
 packages:
@@ -1081,6 +1083,11 @@ packages:
   /diff/5.0.0:
     resolution: {integrity: sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==}
     engines: {node: '>=0.3.1'}
+    dev: true
+
+  /dotenv/10.0.0:
+    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
+    engines: {node: '>=10'}
     dev: true
 
   /ecdsa-sig-formatter/1.0.11:
