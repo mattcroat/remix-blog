@@ -1,5 +1,11 @@
-import { Link, useLoaderData } from 'remix'
+import { HeadersFunction, Link, useLoaderData } from 'remix'
 import { getPosts, Post } from '~/post'
+
+export let headers: HeadersFunction = () => {
+  return {
+    'Cache-Control': 'max-age=3600, s-maxage=3600',
+  }
+}
 
 export let loader = async () => {
   return getPosts()
