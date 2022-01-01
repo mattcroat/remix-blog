@@ -3,5 +3,16 @@
     "env": {
       "ENABLE_FILE_SYSTEM_API": "1"
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/:posts*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=0, s-maxage=60"
+        }
+      ]
+    }
+  ]
 }

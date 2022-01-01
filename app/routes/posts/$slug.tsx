@@ -4,7 +4,7 @@ import { getPost, PostMarkdown } from '~/post'
 
 export let headers: HeadersFunction = () => {
   return {
-    'Cache-Control': 'max-age=0, s-maxage=1800, stale-while-revalidate',
+    'Cache-Control': 'max-age=0, s-maxage=60',
   }
 }
 
