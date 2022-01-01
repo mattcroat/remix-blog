@@ -1,6 +1,12 @@
-import { LoaderFunction, useLoaderData } from 'remix'
+import { HeadersFunction, LoaderFunction, useLoaderData } from 'remix'
 import invariant from 'tiny-invariant'
 import { getPost, PostMarkdown } from '~/post'
+
+export let headers: HeadersFunction = () => {
+  return {
+    'Cache-Control': 'max-age=0, s-maxage=1800, stale-while-revalidate',
+  }
+}
 
 export let loader: LoaderFunction = async ({ params }) => {
   invariant(params.slug, 'Expected params.slug')
