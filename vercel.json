@@ -6,6 +6,15 @@
   },
   "headers": [
     {
+      "source": "/:posts",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=300, s-maxage=300"
+        }
+      ]
+    },
+    {
       "source": "/:posts*",
       "headers": [
         {
