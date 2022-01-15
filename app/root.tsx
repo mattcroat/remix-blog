@@ -16,7 +16,7 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }]
 }
 
-export const meta: MetaFunction = () => {
+export let meta: MetaFunction = () => {
   return { title: 'Remix Blog' }
 }
 
