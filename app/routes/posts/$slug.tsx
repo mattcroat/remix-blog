@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HeadersFunction, LoaderFunction, useLoaderData } from 'remix'
 import { getPost, PostMarkdown } from '~/post'
 
