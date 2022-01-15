@@ -3,24 +3,14 @@ import { marked } from 'marked'
 
 import octokit from '~/lib/octokit'
 
-export interface Post {
+interface Frontmatter {
+  title: string
+  description: string
   slug: string
-  title: string
-}
-
-export interface PostMarkdown extends Post {
-  html: string
-  body: string
-}
-
-export interface PostMarkdownAttributes {
-  title: string
-}
-
-interface NewPost {
-  title: string
-  slug: string
-  markdown: string
+  published: string
+  category: string
+  image: string
+  draft: boolean
 }
 
 interface RateLimit {
@@ -30,20 +20,18 @@ interface RateLimit {
   used: number
 }
 
-function isValidPostAttributes(
-  attributes: any
-): attributes is PostMarkdownAttributes {
-  return attributes?.title
+let repo = {
+  owner: 'mattcroat',
+  repo: 'remix-blog',
 }
 
 async function getRateLimit(): Promise<RateLimit> {
   return (await octokit.rest.rateLimit.get()).data.rate
 }
 
-export async function getPosts(): Promise<Post[]> {
+export async function getPosts(): Promise<any[]> {
   let { data: posts } = await octokit.rest.repos.getContent({
-    owner: 'mattcroat',
-    repo: 'remix-blog',
+    ...repo,
     path: 'posts',
   })
 
@@ -53,16 +41,15 @@ export async function getPosts(): Promise<Post[]> {
 
   let allPosts = Promise.all(
     posts.map(async (post) => {
-      let { data } = await octokit.rest.repos.getContent({
-        mediaType: {
-          format: 'raw',
-        },
-        owner: 'mattcroat',
-        repo: 'remix-blog',
+      let { data: posts } = await octokit.rest.repos.getContent({
+        ...repo,
+        mediaType: { format: 'raw' },
         path: post.path,
       })
 
-      let { attributes } = parseFrontMatter(data.toString())
+      let { attributes } = parseFrontMatter(posts.toString())
+
+      console.log(parseFrontMatter(posts.toString()))
 
       return {
         slug: post.name.replace('.md', ''),
@@ -74,41 +61,44 @@ export async function getPosts(): Promise<Post[]> {
   return allPosts
 }
 
-export async function getPost(slug: string): Promise<PostMarkdown> {
-  let path = `posts/${slug}.md`
-
+export async function getPost(slug: string): Promise<any> {
   let { data: post } = await octokit.rest.repos.getContent({
-    mediaType: {
-      format: 'raw',
-    },
-    owner: 'mattcroat',
-    repo: 'remix-blog',
-    path,
+    ...repo,
+    mediaType: { format: 'raw' },
+    path: `posts/${slug}.md`,
   })
 
   let { attributes, body } = parseFrontMatter(post.toString())
-
   let html = marked(body)
 
-  return { slug, html, body, title: attributes.title }
+  return {
+    slug,
+    html,
+    title: attributes.title,
+    markdown: post,
+  }
 }
 
-export async function updatePost(post: PostMarkdown) {
-  // await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
-  // })
+export async function getPostId(slug: string): Promise<string> {
+  let { data: post } = await octokit.rest.repos.getContent({
+    ...repo,
+    path: `posts/${slug}.md`,
+  })
 
-  // message: commit message
-  // content: new file content base64
-  // sha: blob sha of the file being replaced
-  // query the file for the sha I guess?
-  // look into octokit plugins
+  if (Array.isArray(post)) {
+    throw new Error('Oops!')
+  }
 
+  return post.sha
+}
+
+export async function updatePost(content: string, slug: string) {
   await octokit.rest.repos.createOrUpdateFileContents({
-    owner: 'mattcroat',
-    repo: 'remix-blog',
-    path: `posts/${post.slug}`,
-    message: 'message',
-    content: 'content',
+    ...repo,
+    path: `posts/${slug}.md`,
+    message: 'chore: :robot: Updated using the GitHub API',
+    content: Buffer.from(content, 'utf-8').toString('base64'),
+    sha: await getPostId(slug),
   })
 }
 

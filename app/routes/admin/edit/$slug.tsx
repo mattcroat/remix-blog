@@ -5,7 +5,7 @@ import {
   redirect,
   useLoaderData,
 } from 'remix'
-import { getPost, PostMarkdown } from '~/post'
+import { getPost, PostMarkdown, updatePost } from '~/post'
 
 export let loader: LoaderFunction = async ({ params }) => {
   return getPost(params.slug)
@@ -13,14 +13,15 @@ export let loader: LoaderFunction = async ({ params }) => {
 
 export let action: ActionFunction = async ({ request }) => {
   let formData = await request.formData()
-
   let title = formData.get('title')
+  let slug = formData.get('slug')
   let markdown = formData.get('markdown')
 
-  console.log({ title, markdown })
+  if (!title || !slug || !markdown) {
+    throw new Error(`Fields can't be empty`)
+  }
 
-  // updatePost(post)
-
+  updatePost(markdown, slug)
   return redirect('/admin')
 }
 
@@ -33,7 +34,15 @@ export default function PostSlug() {
         <input name="title" type="text" defaultValue={post.title} />
       </p>
       <p>
-        <textarea name="markdown" rows={20} defaultValue={post.body} />
+        <input name="slug" type="text" defaultValue={post.slug} />
+      </p>
+      <p>
+        <textarea
+          name="markdown"
+          cols={40}
+          rows={10}
+          defaultValue={post.markdown}
+        />
       </p>
       <p>
         <button type="submit">Save Post</button>
