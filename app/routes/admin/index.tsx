@@ -5,7 +5,7 @@ export let loader = async () => {
   return getPosts()
 }
 
-export default function Posts() {
+export default function AdminPage() {
   let posts = useLoaderData<Post[]>()
 
   return (
@@ -15,7 +15,7 @@ export default function Posts() {
         <ul>
           {posts.map((post) => (
             <li key={post.slug}>
-              <Link to={post.slug}>{post.title}</Link>
+              <Link to={`./edit/${post.slug}`}>{post.title}</Link>
             </li>
           ))}
         </ul>

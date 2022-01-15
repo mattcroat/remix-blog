@@ -1,5 +1,4 @@
 import parseFrontMatter from 'front-matter'
-import invariant from 'tiny-invariant'
 import { marked } from 'marked'
 
 import octokit from '~/lib/octokit'
@@ -65,16 +64,12 @@ export async function getPosts(): Promise<Post[]> {
 
       let { attributes } = parseFrontMatter(data.toString())
 
-      invariant(isValidPostAttributes(attributes), `${post} has bad meta data!`)
-
       return {
         slug: post.name.replace('.md', ''),
         title: attributes.title,
       }
     })
   )
-
-  console.log(await getRateLimit())
 
   return allPosts
 }
@@ -93,16 +88,28 @@ export async function getPost(slug: string): Promise<PostMarkdown> {
 
   let { attributes, body } = parseFrontMatter(post.toString())
 
-  invariant(
-    isValidPostAttributes(attributes),
-    `Post ${path} is missing attributes`
-  )
-
   let html = marked(body)
 
-  console.log(await getRateLimit())
-
   return { slug, html, body, title: attributes.title }
+}
+
+export async function updatePost(post: PostMarkdown) {
+  // await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+  // })
+
+  // message: commit message
+  // content: new file content base64
+  // sha: blob sha of the file being replaced
+  // query the file for the sha I guess?
+  // look into octokit plugins
+
+  await octokit.rest.repos.createOrUpdateFileContents({
+    owner: 'mattcroat',
+    repo: 'remix-blog',
+    path: `posts/${post.slug}`,
+    message: 'message',
+    content: 'content',
+  })
 }
 
 // export async function createPost(post: NewPost) {
