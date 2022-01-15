@@ -1,7 +1,10 @@
----
-title: First Post
----
 
-# First Post
+    ---
+    title: First Post
+    ---
 
-This is the first post.
+    # First Post
+    This is the first post.
+
+    Updated using the GitHub API.
+  
