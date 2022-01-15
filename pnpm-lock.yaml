@@ -16,7 +16,6 @@ specifiers:
   react: ^17.0.2
   react-dom: ^17.0.2
   remix: ^1.1.1
-  tiny-invariant: ^1.2.0
   typescript: ^4.5.4
 
 dependencies:
@@ -31,7 +30,6 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   remix: 1.1.1
-  tiny-invariant: 1.2.0
 
 devDependencies:
   '@remix-run/dev': 1.1.1
@@ -3276,10 +3274,6 @@ packages:
       mkdirp: 1.0.4
       yallist: 4.0.0
     dev: true
-
-  /tiny-invariant/1.2.0:
-    resolution: {integrity: sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==}
-    dev: false
 
   /to-regex-range/5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
